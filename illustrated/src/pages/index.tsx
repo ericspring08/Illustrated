@@ -1,7 +1,7 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import axios from "axios"
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { jsPDF } from "jspdf"
 import { toPng } from "html-to-image"
 import Modal from "./_modal";
@@ -46,9 +46,7 @@ const Home: NextPage = () => {
           }}></textarea>
           <div className="mt-10 w-[80%]">
             <label className="btn btn-primary mr-[1%] w-[49%]" htmlFor="fileUpload">upload pdf</label>
-            <button className="btn btn-secondary ml-[1%] w-[49%]" onClick={() => {
-
-            }}>scan book</button>
+            <button className="btn btn-secondary ml-[1%] w-[49%]">scan book</button>
           </div>
           <label className="btn btn-error text-white mt-2 w-[80%]" htmlFor="my-modal-3" onClick={() => {
             getWordData(words)
