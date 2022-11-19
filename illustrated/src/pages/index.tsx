@@ -66,14 +66,14 @@ const Home: NextPage = () => {
             <div ref={pdfRef}>
               <h3 className="font-bold text-5xl text-center mt-[20px]">Book Thing</h3>
               {
-                render.map(element => {
+                render.map((element, index) => {
                   if (element.includes("base64")) {
                     return (
-                      <img src={element}></img>
+                      <img key={index} src={element}></img>
                     )
                   } else {
                     return (
-                      <p>{element}</p>
+                      <p key={index}>{element}</p>
                     )
                   }
                 })
