@@ -25,7 +25,7 @@ const Home: NextPage = () => {
   }
 
   const generateImage = async () => {
-    const image = await toPng(pdfRef.current, { quality: 0.95 });
+    const image = await toPng(pdfRef.current!, { quality: 0.95 });
     const doc = new jsPDF();
     doc.addImage(image, 'JPEG', 5, 22, 200, 160);
     doc.save("hi.pdf");
