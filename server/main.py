@@ -13,6 +13,7 @@ def index():
 @app.route('/processword', methods=['POST'])
 def ProcessWord():
     nltk.download('punkt')
+    nltk.download('stopwords')
     words = request.form['words']
 
     return jsonify(processword.ProcessWords(words).processwords())
