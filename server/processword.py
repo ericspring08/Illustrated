@@ -5,10 +5,10 @@ import nltk
 class ProcessWords:
     """Process words"""
 
-    def __init__(self, word: str) -> None:
+    def __init__(self, word: str):
         self.word = word
 
-    def processwords(self) -> list[str]:
+    def processwords(self):
         """Process word"""
 
         sent = word_tokenize(self.word)
