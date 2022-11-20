@@ -15,7 +15,7 @@ const Home: NextPage = () => {
   
   const [render, setRender] = useState([""]);
   const getWordData = (words: string) => {
-    axios({method: "POST", url: "http://127.0.0.1:5000/processword", data: { 'words': words }}).then((res) => {
+    axios({method: "POST", url: "https://illustratedbackend.up.railway.app/processword", data: { 'words': words }}).then((res) => {
       setRender(res.data);
     })
   }
