@@ -19,4 +19,4 @@ def ProcessWord():
     return jsonify(processword.ProcessWords(words).processwords())
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
