@@ -19,9 +19,9 @@ const Home: NextPage = () => {
   ]
   const [render, setRender] = useState([""]);
   const getWordData = (words: string) => {
-    //axios.post("", { text: words }).then((res) => {
-    //})
-    setRender(mockData)
+    axios({method: "POST", url: "http://127.0.0.1:5000/processword", data: { 'words': words }}).then((res) => {
+      setRender(res.data);
+    })
   }
 
   const generateImage = async () => {
@@ -66,6 +66,7 @@ const Home: NextPage = () => {
               {
                 render.map((element, index) => {
                   if (element.includes("base64")) {
+                    console.log(element)
                     return (
                       <img key={index} src={element}></img>
                     )

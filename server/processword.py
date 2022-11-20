@@ -28,7 +28,7 @@ class ProcessWords:
 
         for i in range(num_of_sentences):
             image = self.generate_image(ranked_sentences[i][1])
-            self.sent.insert(self.sent.index(ranked_sentences[i][1]), image)
+            self.sent.insert(self.sent.index(ranked_sentences[i][1]), "data:image/png;base64," + str(image))
 
         return self.sent
         return ranked_sentences
@@ -78,6 +78,6 @@ class ProcessWords:
     def generate_image(self, sentence):
         """Generate image"""
 
-        res = requests.post('http://1c17-34-142-202-111.ngrok.io/generateimage', data={'sentences': sentence})
+        res = requests.post('http://d731-34-142-202-111.ngrok.io/generateimage', data={'sentences': sentence})
 
         return res.json().get('image')
