@@ -16,7 +16,7 @@ const Home: NextPage = () => {
 
   const getWordData = async(words: string) => {
     setIsProcessing(true)
-    await axios({ method: "POST", url: "https://https://illustratedbackend.up.railway.app/processword", data: { 'words': words } }).then((res) => {
+    await axios({ method: "POST", url: "https://illustratedbackend.up.railway.app/processword", data: { 'words': words } }).then((res) => {
       setRender(res.data);
     })
     setIsProcessing(false)
