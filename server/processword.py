@@ -8,6 +8,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 import networkx as nx
 import gzip
 import requests
+import os
 
 class ProcessWords:
     """Process words"""
@@ -78,6 +79,6 @@ class ProcessWords:
     def generate_image(self, sentence):
         """Generate image"""
 
-        res = requests.post('http://d731-34-142-202-111.ngrok.io/generateimage', data={'sentences': sentence})
+        res = requests.post(str(os.environ.get('colab')) + '/generateimage', data={'sentences': sentence})
 
         return res.json().get('image')

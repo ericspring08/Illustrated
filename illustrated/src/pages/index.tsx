@@ -1,6 +1,5 @@
-import { type NextPage } from "next";
-import Head from "next/head";
-import axios from "axios"
+import { type NextPage } from "next"; import Head from "next/head"; 
+import axios from "axios" 
 import { useState, useRef } from "react"
 import { jsPDF } from "jspdf"
 import { toPng } from "html-to-image"
@@ -12,12 +11,16 @@ const Home: NextPage = () => {
   const [file, setFile] = useState<any>()
   const [error, setError] = useState<boolean>(false)
   const pdfRef = useRef<HTMLDivElement>(null)
+  const [isProcessing, setIsProcessing] = useState<boolean>(false)
   
   const [render, setRender] = useState([""]);
-  const getWordData = (words: string) => {
-    axios({method: "POST", url: "https://illustratedbackend.up.railway.app/processword", data: { 'words': words }}).then((res) => {
+  const getWordData = async(words: string) => {
+    setIsProcessing(true)
+    await axios({method: "POST", url: "https://illustratedbackend.up.railway.app/processword", data: { 'words': words }}).then((res) => {
       setRender(res.data);
     })
+
+    setIsProcessing(false)
   }
 
   const generateImage = async () => {
@@ -59,6 +62,13 @@ const Home: NextPage = () => {
           <div className="w-screen h-screen flex flex-col items-start ml-[2%]">
             <div ref={pdfRef}>
               <h3 className="font-bold text-5xl text-center mt-[20px]">Book Thing</h3>
+              {
+                isProcessing === true &&
+                <div className="flex flex-col items-center mt-[20px]">
+                  <div className="spinner"></div>
+                  <p className="text-xl mt-[20px]">Processing...</p>
+                </div>
+              }
               {
                 render.map((element, index) => {
                   if (element.includes("base64")) {
