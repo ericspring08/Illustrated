@@ -14,11 +14,11 @@ const Home: NextPage = () => {
   const [isProcessing, setIsProcessing] = useState<boolean>(false)
   const [render, setRender] = useState([""]);
 
-  const getWordData = (words: string) => {
-    axios({ method: "POST", url: "https://illustratedbackend.up.railway.app/processword", data: { 'words': words } }).then((res) => {
+  const getWordData = async(words: string) => {
+    setIsProcessing(true)
+    await axios({ method: "POST", url: "http://127.0.0.1:5000/processword", data: { 'words': words } }).then((res) => {
       setRender(res.data);
     })
-
     setIsProcessing(false)
   }
 
@@ -60,7 +60,7 @@ const Home: NextPage = () => {
         <div className="modal bg-white w-screen h-screen overflow-auto">
           <div className="w-screen h-screen flex flex-col items-center">
             <div ref={pdfRef} className="w-[90%]">
-              <h3 className="font-bold text-5xl text-center mt-[20px]">Book Thing</h3>
+              <h3 className="font-bold text-5xl text-center mt-[20px]">Illustrated</h3>
               {
                 isProcessing === true &&
                 <div className="flex flex-col items-center mt-[20px]">

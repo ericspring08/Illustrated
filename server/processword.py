@@ -79,6 +79,6 @@ class ProcessWords:
     def generate_image(self, sentence):
         """Generate image"""
 
-        res = requests.post(f'http://8a64-34-91-56-224.ngrok.io/generateimage', data={'sentences': sentence})
+        res = requests.post(f'http://ba56-34-91-144-50.ngrok.io/generateimage', data={'sentences': sentence})
 
         return res.json().get('image')
