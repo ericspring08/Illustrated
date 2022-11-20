@@ -16,7 +16,7 @@ const Home: NextPage = () => {
 
   const getWordData = async(words: string) => {
     setIsProcessing(true)
-    await axios({ method: "POST", url: "http://127.0.0.1:5000/processword", data: { 'words': words } }).then((res) => {
+    await axios({ method: "POST", url: "https://https://illustratedbackend.up.railway.app/processword", data: { 'words': words } }).then((res) => {
       setRender(res.data);
     })
     setIsProcessing(false)
@@ -43,8 +43,7 @@ const Home: NextPage = () => {
             setWords(e.target.value)
           }}></textarea>
           <div className="mt-10 w-[80%]">
-            <label className="btn btn-primary mr-[1%] w-[49%]" htmlFor="fileUpload">upload pdf</label>
-            <label className="btn btn-secondary ml-[1%] w-[49%]" htmlFor="textUpload">upload text file</label>
+            <label className="btn btn-secondary w-[100%]" htmlFor="textUpload">upload text file</label>
           </div>
           <label className="btn btn-error text-white mt-2 w-[80%]" htmlFor="my-modal-3" onClick={() => {
             getWordData(words)
