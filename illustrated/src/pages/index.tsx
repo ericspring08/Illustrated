@@ -39,6 +39,7 @@ const Home: NextPage = () => {
       <main>
         <div className="flex flex-col items-center h-screen w-screen">
           <h1 className="text-5xl mt-[50px] font-monospace font-bold">Illustrated</h1>
+          <h2 className="text-2xl mt-5 font-monospace">Minimum 5 sentences</h2>
           <textarea value={words} placeholder="Type Here" className="textarea textarea-bordered mt-[50px] w-[80%] h-1/2" autoComplete="false" onChange={(e) => {
             setWords(e.target.value)
           }}></textarea>
