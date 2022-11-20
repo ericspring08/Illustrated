@@ -91,21 +91,6 @@ const Home: NextPage = () => {
             </div>
           </div>
         </div>
-        <Modal id="fileUpload" title="Upload a .PDF File">
-          <input type="file" accept=".pdf" className="file-input file-input-bordered" onChange={(e) => {
-            setFile(e.target.files)
-          }}></input>
-          <label className="btn" htmlFor="fileUpload" onClick={() => {
-            if (!file) {
-              setError(true)
-              setTimeout(() => {
-                setError(false)
-              }, 2000)
-            } else {
-
-            }
-          }}>Submit File</label>
-        </Modal>
         <Modal id="textUpload" title="Upload a .TXT File">
           <input type="file" accept=".txt" className="file-input file-input-bordered" onChange={(e) => {
             setFile(e.target.files)
