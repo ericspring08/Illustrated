@@ -16,6 +16,7 @@ def ProcessWord():
     nltk.download('punkt')
     nltk.download('stopwords')
     words = request.json['words']
+    print(words)
 
     return jsonify(processword.ProcessWords(words).processwords())
 
@@ -30,4 +31,4 @@ def Converter():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
