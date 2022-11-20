@@ -11,12 +11,19 @@ const Home: NextPage = () => {
   const [file, setFile] = useState<any>()
   const [error, setError] = useState<boolean>(false)
   const pdfRef = useRef<HTMLDivElement>(null)
+<<<<<<< HEAD
   const [isProcessing, setIsProcessing] = useState<boolean>(false)
   
   const [render, setRender] = useState([""]);
   const getWordData = async(words: string) => {
     setIsProcessing(true)
     await axios({method: "POST", url: "https://illustratedbackend.up.railway.app/processword", data: { 'words': words }}).then((res) => {
+=======
+
+  const [render, setRender] = useState([""]);
+  const getWordData = (words: string) => {
+    axios({ method: "POST", url: "https://illustratedbackend.up.railway.app/processword", data: { 'words': words } }).then((res) => {
+>>>>>>> 91060105dd4c1325474f21a4879054562c9304ec
       setRender(res.data);
     })
 
@@ -24,7 +31,7 @@ const Home: NextPage = () => {
   }
 
   const generateImage = async () => {
-    const image = await toPng(pdfRef.current!, { quality: 0.95 });
+    const image = await toPng(pdfRef.current!, { quality: 1 });
     const doc = new jsPDF();
     doc.addImage(image, 'JPEG', 5, 22, 200, 160);
     doc.save("book.pdf");
@@ -59,8 +66,8 @@ const Home: NextPage = () => {
         </div>
         <input type="checkbox" id="my-modal-3" className="modal-toggle" />
         <div className="modal bg-white w-screen h-screen overflow-auto">
-          <div className="w-screen h-screen flex flex-col items-start ml-[2%]">
-            <div ref={pdfRef}>
+          <div className="w-screen h-screen flex flex-col items-center">
+            <div ref={pdfRef} className="w-[90%]">
               <h3 className="font-bold text-5xl text-center mt-[20px]">Book Thing</h3>
               {
                 isProcessing === true &&
@@ -78,17 +85,17 @@ const Home: NextPage = () => {
                     )
                   } else {
                     return (
-                      <p key={index}>{element}</p>
+                      <p key={index} className="items-start">{element}</p>
                     )
                   }
                 })
               }
             </div>
-            <div className="modal-action">
-              <label htmlFor="my-modal-3" className="btn text-white info" onClick={() => {
+            <div className="modal-action w-[90%]">
+              <label htmlFor="my-modal-3" className="btn text-white btn-info" onClick={() => {
                 generateImage()
               }}>Download as PDF</label>
-              <label htmlFor="my-modal-3" className="btn text-white success">Convert New</label>
+              <label htmlFor="my-modal-3" className="btn text-white btn-success">Convert New</label>
             </div>
           </div>
         </div>
