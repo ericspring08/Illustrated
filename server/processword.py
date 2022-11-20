@@ -7,6 +7,7 @@ import re
 from sklearn.metrics.pairwise import cosine_similarity
 import networkx as nx
 import gzip
+import requests
 
 class ProcessWords:
     """Process words"""
@@ -20,7 +21,16 @@ class ProcessWords:
         """Process word"""
 
         ranked_sentences = self.rankwords()
+        
+        num_of_sentences = round(len(ranked_sentences)/4)
 
+        images = []
+
+        for i in range(num_of_sentences):
+            image = self.generate_image(ranked_sentences[i][1])
+            self.sent.insert(self.sent.index(ranked_sentences[i][1]), "data:image/png;base64," + str(image))
+
+        return self.sent
         return ranked_sentences
 
     def rankwords(self):
@@ -64,3 +74,10 @@ class ProcessWords:
             coefs = np.asarray(values[1:], dtype='float32')
             self.word_embeddings[word] = coefs
         f.close()
+
+    def generate_image(self, sentence):
+        """Generate image"""
+
+        res = requests.post('http://d731-34-142-202-111.ngrok.io/generateimage', data={'sentences': sentence})
+
+        return res.json().get('image')

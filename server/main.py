@@ -15,7 +15,7 @@ def index():
 def ProcessWord():
     nltk.download('punkt')
     nltk.download('stopwords')
-    words = request.form['words']
+    words = request.json['words']
 
     return jsonify(processword.ProcessWords(words).processwords())
 
