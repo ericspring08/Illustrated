@@ -34,11 +34,11 @@ const Home: NextPage = () => {
       <Head>
         <title>Illustrated</title>
         <meta name="description" content="Convert normal books into picture books" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/Illustrated-Logo.png" />
       </Head>
       <main>
         <div className="flex flex-col items-center h-screen w-screen">
-          <h1 className="text-5xl mt-[50px] font-monospace">Illustrated</h1>
+          <h1 className="text-5xl mt-[50px] font-monospace font-bold">Illustrated</h1>
           <textarea value={words} placeholder="Type Here" className="textarea textarea-bordered mt-[50px] w-[80%] h-1/2" autoComplete="false" onChange={(e) => {
             setWords(e.target.value)
           }}></textarea>
