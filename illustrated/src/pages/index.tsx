@@ -11,19 +11,11 @@ const Home: NextPage = () => {
   const [file, setFile] = useState<any>()
   const [error, setError] = useState<boolean>(false)
   const pdfRef = useRef<HTMLDivElement>(null)
-<<<<<<< HEAD
   const [isProcessing, setIsProcessing] = useState<boolean>(false)
-  
   const [render, setRender] = useState([""]);
-  const getWordData = async(words: string) => {
-    setIsProcessing(true)
-    await axios({method: "POST", url: "https://illustratedbackend.up.railway.app/processword", data: { 'words': words }}).then((res) => {
-=======
 
-  const [render, setRender] = useState([""]);
   const getWordData = (words: string) => {
     axios({ method: "POST", url: "https://illustratedbackend.up.railway.app/processword", data: { 'words': words } }).then((res) => {
->>>>>>> 91060105dd4c1325474f21a4879054562c9304ec
       setRender(res.data);
     })
 
