@@ -79,6 +79,6 @@ class ProcessWords:
     def generate_image(self, sentence):
         """Generate image"""
 
-        res = requests.post(str(os.environ.get('colab')) + '/generateimage', data={'sentences': sentence})
+        res = requests.post(f'http://d731-34-142-202-111.ngrok.io/generateimage', data={'sentences': sentence})
 
         return res.json().get('image')
