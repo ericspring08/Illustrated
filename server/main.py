@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 import processword 
 import nltk
+import base64
 
 app = Flask(__name__)
 CORS(app)
@@ -18,5 +19,15 @@ def ProcessWord():
 
     return jsonify(processword.ProcessWords(words).processwords())
 
+@app.route("/converter", methods=["POST"])
+def Converter():
+    pdf = request.form["pdf"]
+    encoded = pdf.encode("ascii")
+    decoded = base64.b64decode(encoded)
+    text = decoded.decode("ascii")
+
+    return jsonify({text: text})
+
+
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

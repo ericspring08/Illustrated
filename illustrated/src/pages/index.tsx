@@ -1,15 +1,15 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import axios from "axios"
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef } from "react"
 import { jsPDF } from "jspdf"
 import { toPng } from "html-to-image"
 import Modal from "./_modal";
 // eslint-disable
 
 const Home: NextPage = () => {
-  const [words, setWords] = useState("")
-  const [pdfFile, setPdfFile] = useState<any>()
+  const [words, setWords] = useState<any>("")
+  const [file, setFile] = useState<any>()
   const [error, setError] = useState<boolean>(false)
   const pdfRef = useRef<HTMLDivElement>(null)
   
@@ -42,7 +42,7 @@ const Home: NextPage = () => {
           }}></textarea>
           <div className="mt-10 w-[80%]">
             <label className="btn btn-primary mr-[1%] w-[49%]" htmlFor="fileUpload">upload pdf</label>
-            <button className="btn btn-secondary ml-[1%] w-[49%]">scan book</button>
+            <label className="btn btn-secondary ml-[1%] w-[49%]" htmlFor="textUpload">upload text file</label>
           </div>
           <label className="btn btn-error text-white mt-2 w-[80%]" htmlFor="my-modal-3" onClick={() => {
             getWordData(words)
@@ -64,7 +64,7 @@ const Home: NextPage = () => {
                   if (element.includes("base64")) {
                     console.log(element)
                     return (
-                      <img key={index} src={element}></img>
+                      <img key={index} src={element} className="mt-[20px] mb-[20px]"></img>
                     )
                   } else {
                     return (
@@ -75,24 +75,44 @@ const Home: NextPage = () => {
               }
             </div>
             <div className="modal-action">
-              <label htmlFor="my-modal-3" className="btn" onClick={() => {
+              <label htmlFor="my-modal-3" className="btn text-white info" onClick={() => {
                 generateImage()
               }}>Download as PDF</label>
+              <label htmlFor="my-modal-3" className="btn text-white success">Convert New</label>
             </div>
           </div>
         </div>
-        <Modal id="fileUpload" title="Upload a PDF File">
+        <Modal id="fileUpload" title="Upload a .PDF File">
           <input type="file" accept=".pdf" className="file-input file-input-bordered" onChange={(e) => {
-            setPdfFile(e.target.files)
+            setFile(e.target.files)
           }}></input>
           <label className="btn" htmlFor="fileUpload" onClick={() => {
-            if (!pdfFile) {
+            if (!file) {
               setError(true)
               setTimeout(() => {
                 setError(false)
               }, 2000)
             } else {
-              
+
+            }
+          }}>Submit File</label>
+        </Modal>
+        <Modal id="textUpload" title="Upload a .TXT File">
+          <input type="file" accept=".txt" className="file-input file-input-bordered" onChange={(e) => {
+            setFile(e.target.files)
+          }}></input>
+          <label className="btn" htmlFor="textUpload" onClick={() => {
+            if (!file) {
+              setError(true)
+              setTimeout(() => {
+                setError(false)
+              }, 2000)
+            } else {
+              const reader = new FileReader()
+              reader.readAsText(file[0])
+              reader.onload = () => {
+                setWords(reader.result)
+              }
             }
           }}>Submit File</label>
         </Modal>
